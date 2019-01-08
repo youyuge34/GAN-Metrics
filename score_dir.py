@@ -98,15 +98,21 @@ if __name__ == '__main__':
     res += 'FID:\t{}\n'.format(score[30])
     print(res)
 
+    if opt.real[-1] == '\\' or opt.real[-1] == '/':
+        opt.real = opt.real[:-1]
+
+    if opt.fake[-1] == '\\' or opt.fake[-1] == '/':
+        opt.fake = opt.fake[:-1]
+
     # save scores to .txt file
     path = os.path.join(opt.outf,
-                        'score_{}_{}.txt'.format(str(opt.real).split('/')[-1], str(opt.fake).split('/')[-1]))
+                        'score_{}_{}.txt'.format(str(opt.real).split('/')[-1].split('\\')[-1], str(opt.fake).split('/')[-1].split('\\')[-1]))
     with open(path, 'w', encoding='utf-8') as f:
         f.write(res)
 
     # save final metric scores to npy
     path = os.path.join(opt.outf,
-                        'score_{}_{}.npy'.format(str(opt.real).split('/')[-1], str(opt.fake).split('/')[-1]))
+                        'score_{}_{}.npy'.format(str(opt.real).split('/')[-1].split('\\')[-1], str(opt.fake).split('/')[-1].split('\\')[-1]))
     np.save(path, score)
     print('##### training completed :) #####')
     print('### metric scores output is scored at {} ###'.format(path))

@@ -205,3 +205,4 @@ main2.pdf
 .DS_Store
 
 inputs/
+venv.bat
